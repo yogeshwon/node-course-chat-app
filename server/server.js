@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const {generateMessage , generateLocationMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 4001;
 
@@ -35,11 +36,11 @@ io.on('connection', (socket) => {
       createdAt: new Date().getTime()
     });
     callback('this is from the server');
-    // socket.broadcast.emit('newMessage', {
-    //   from: message.from,
-    //   text:message.text,
-    //   createdAt: new Date().getTime()
-    // });
+  });
+
+  socket.on('createLocaltionMessage', (coords) => {
+    io.emit('newLocationMessage',
+    generateLocationMessage('Admin', coords.latitude, coords.longitude));
   });
 
   socket.on('disconnect', () => {
