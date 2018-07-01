@@ -5,10 +5,7 @@ socket.on('connect', function() {
   //   to: 'yogeshwon"gmail.com',
   //   text: 'Hey, This is Yogesh'
   // });
-  socket.emit('createMessage', {
-    form: 'Yogesh',
-    test:'hi'
-  })
+ 
 });
 socket.on('', function() {
   console.log('Disconnected from server');
