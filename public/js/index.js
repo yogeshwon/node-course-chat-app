@@ -11,20 +11,22 @@ socket.on('', function() {
   console.log('Disconnected from server');
 });
 
-
-// socket.on('newEmail' , function(email) {
-//   console.log('New Eamil' , email);
-// })
-
-
 socket.on('newMessage', function(message){
   console.log('newMessage' , message);
-})
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
 
+  jQuery('#messages').append(li);
+});
 
-socket.emit('createMessage', {
-  from: "Yogesh",
-  text: 'Hi'
-}, function(data){
-  console.log('Got it', data);
+jQuery( document ).ready(function() {
+  jQuery('#message-form').on('submit', function(event){
+    event.preventDefault();
+    socket.emit('createMessage' , {
+      from: 'User',
+      text: jQuery('[name=message]').val()
+    }, function() {
+
+    });
+  });
 });
