@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
       text:message.text,
       createdAt: new Date().getTime()
     });
-    callback('this is from the server');
+    callback();
   });
 
   socket.on('createLocaltionMessage', (coords) => {
